@@ -1,0 +1,8 @@
+html,body {
+    padding: 0;
+}
+
+.app-container {
+    margin-top: 80px;
+    text-align: center;
+}
