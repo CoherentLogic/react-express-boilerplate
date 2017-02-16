@@ -6,6 +6,10 @@ export default class Navigation extends React.Component {
     constructor() {
         super();
 
+        this.state = {
+            collapsed: true
+        };
+
         this.navLinkClasses = {
             home: "active",
             about: "",
@@ -13,7 +17,15 @@ export default class Navigation extends React.Component {
         };
     }
 
-    render() {        
+    toggleCollapse() {
+        const collapsed = !this.state.collapsed;
+        this.setState({collapsed});
+    }
+
+    render() {   
+
+        const {collapsed} = this.state;
+        const navClass = collapsed ? "collapse" : "";     
 
         for(var property in this.navLinkClasses) {
             if(this.navLinkClasses.hasOwnProperty(property)) {
@@ -30,9 +42,15 @@ export default class Navigation extends React.Component {
             <nav class="navbar navbar-inverse navbar-fixed-top">
                 <div class="container">
                     <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" onClick={this.toggleCollapse.bind(this)}>
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
                         <a class="navbar-brand" href="#">{this.props.title}</a>
                     </div>
-                    <div class="collapse navbar-collapse">
+                    <div id="navbar" class={"navbar-collapse " + navClass}>
                         <ul class="nav navbar-nav">
                             <li class={this.navLinkClasses.home}><Link to="home">Home</Link></li>
                             <li class={this.navLinkClasses.about}><Link to="about">About</Link></li>
