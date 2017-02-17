@@ -1,2 +1,3 @@
 node_modules
 client/dist/js/client.min.js
+npm-debug.log

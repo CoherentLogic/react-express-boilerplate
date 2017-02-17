@@ -1,37 +1,61 @@
-var express = require('express');
-var router = express.Router();
+const crypto = require('crypto')
+const express = require('express');
+const router = express.Router();
+
+function hash(string) {
+    const secret = "a secret";
+    return crypto.createHmac('sha256', secret).update(string).digest('hex');
+}
+
+var userData = [
+    {
+        username: "mithrandir",
+        name: {
+            salutation: "Mr.",
+            first: "Gandalf",
+            middle: "J",
+            last: "Stormcrow"
+        },
+        passwordHash: hash("keepItSecret!")
+    },
+    {
+        username: "frodo",
+        name: {
+            salutation: "Mr.",
+            first: "Frodo",
+            middle: "P",
+            last: "Baggins"
+        },
+        passwordHash: hash("keepItSafe!")
+    }
+];
 
 /* GET home page. */
-router.get('/api', (req, res, next) => {
+router.get('/api/users', (req, res, next) => {
 
-    //
-    // responseObject is the response that will be sent back
-    //
-    var responseObject = {
-        success: true,
-        message: "The /api endpoint worked!"
-    };
+    res.header("Content-Type", "application/json");
 
-    res.send(responseObject);
-
-});
-
-router.post('/api', (req, res, next) => {
-
-    var responseObject = {
+    var response = {
+        users: userData,
         success: true
     };
 
-    //
-    // req.body contains the JSON that you would
-    // probably want to write to a database.
-    //
-    // Here, we're just logging it to the JS console and
-    // sending a simple {success: true} back as the response.
-    //
-    console.log(req.body);
+    res.send(response);
 
-    res.send(responseObject);
+});
+
+router.post('/api/users', (req, res, next) => {
+
+    res.header("Content-Type", "application/json");
+
+    userData.push(req.body);
+
+    var response = {
+        success: true,
+        user: req.body
+    };
+
+    res.send(response);
 
 });
 
