@@ -5,9 +5,11 @@
   "author": "John P. Willis <jpw@coherent-logic.com>",
   "license": "AGPL-3.0",
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "build-server": "node ./node_modules/babel-cli/bin/babel --presets=es2015,stage-2 server/src --out-dir server/dist"
   },
   "dependencies": {
+    "babel-cli": "^6.23.0",
     "babel-core": "^6.23.1",
     "babel-loader": "^6.3.0",
     "babel-plugin-add-module-exports": "^0.2.1",
@@ -21,6 +23,10 @@
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.0",
     "express": "~4.14.1",
+    "express-session": "^1.15.1",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^6.1.2",
+    "mongodb": "^2.2.24",
     "mongoose": "^4.8.2",
     "morgan": "~1.7.0",
     "react": "^15.4.2",

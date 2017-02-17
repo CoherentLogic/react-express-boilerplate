@@ -30,7 +30,15 @@ var userData = [
     }
 ];
 
-/* GET home page. */
+
+router.post('/api/login', (req, res, next) => {
+
+    res.header("Content-Type", "application/json");
+
+
+
+});
+
 router.get('/api/users', (req, res, next) => {
 
     res.header("Content-Type", "application/json");
